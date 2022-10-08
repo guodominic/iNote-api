@@ -24,6 +24,7 @@ app.get('/notes', (req, res) => {
     db('inotes').orderBy('id', 'asc').then(data => {
         res.status(200).json(data)
     })
+        .catch(err => res.status(400).json('unable to update'))
 
 })
 
@@ -31,7 +32,7 @@ app.get('/note/:id', (req, res) => {
     const { id } = req.params;
     db.select('*').from('inotes').where('id', '=', id).then(data => {
         res.status(200).json(data)
-    })
+    }).catch(err => res.status(400).json('unable to update'))
 })
 
 app.put('/update/:id', (req, res) => {
