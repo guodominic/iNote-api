@@ -4,13 +4,19 @@ const knex = require('knex')
 const db = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        port: 5432,
-        user: '',
-        password: '',
-        database: 'inotes'
-    }
-})  // to connect the server to the postgresql database
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    } // to connect knex to heroku
+    /*     connection: {
+            host: '127.0.0.1',
+            port: 5432,
+            user: '',
+            password: '',
+            database: 'inotes'
+        } */
+})  // to connect the local host server to the postgresql database
 /* 
 db.select('*').from('inotes').then(data => {
     console.log(data);
