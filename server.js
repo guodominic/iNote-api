@@ -26,8 +26,7 @@ const app = express()
 app.use(express.json())  //to parse json
 app.use(cors())  //to allow access to from front end to the server
 
-app.get('/', (req, res) => { res.send('it is working') })
-app.get('/notes', (req, res) => {
+app.get('/', (req, res) => {
     db('inotes').orderBy('id', 'asc').then(data => {
         res.status(200).json(data)
     })
