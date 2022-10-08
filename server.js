@@ -67,6 +67,6 @@ app.post('/note/new', (req, res) => {
 })
 
 
-app.listen(3000, () => {
-    console.log('app is running ok')
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`APP IS RUNNING ON ${PORT}`)
 });
