@@ -68,5 +68,5 @@ app.post('/note/new', (req, res) => {
 
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log(`APP IS RUNNING ON ${PORT}`)
+    console.log(`APP IS RUNNING ON ${process.env.PORT}`)
 });
