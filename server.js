@@ -47,7 +47,7 @@ app.put('/update/:id', (req, res) => {
     db('inotes').where('id', req.params.id)
         .update({
             'body': body,
-            'lastupdate': updated
+            'lastupdate': lastupdate
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to update'))
@@ -67,7 +67,7 @@ app.post('/note/new', (req, res) => {
     db('inotes')
         .insert({
             'body': body,
-            'lastupdate': updated
+            'lastupdate': lastupdate
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to create'))
