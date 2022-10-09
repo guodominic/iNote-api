@@ -43,11 +43,11 @@ app.get('/note/:id', (req, res) => {
 })
 
 app.put('/update/:id', (req, res) => {
-    const { body, updated } = req.body;
+    const { body, lastupdate } = req.body;
     db('inotes').where('id', req.params.id)
         .update({
             'body': body,
-            'updated': updated
+            'lastupdate': updated
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to update'))
@@ -63,11 +63,11 @@ app.delete('/delete/:id', (req, res) => {
 )
 
 app.post('/note/new', (req, res) => {
-    const { body, updated } = req.body;
+    const { body, lastupdate } = req.body;
     db('inotes')
         .insert({
             'body': body,
-            'updated': updated
+            'lastupdate': updated
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to create'))
