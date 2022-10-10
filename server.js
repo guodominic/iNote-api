@@ -73,15 +73,9 @@ app.post('/note/new', (req, res) => {
         .catch(err => res.status(400).json('unable to create'))
 })
 
-//************************************ */
+//************************* */
 //For todo List below
 
-app.get('/todolist', (req, res) => {
-    db('todolists').then(data => {
-        res.status(200).json(data)
-    })
-        .catch(err => res.sendStatus(400).json('unable to fetch todo list'))
-})
 
 app.get('/todolist/:id', (req, res) => {
     db('todolists').where('id', req.params.id).then(data => {
@@ -113,10 +107,10 @@ app.delete('/todolist/delete/:id/:todoId', (req, res) => {
 }
 )
 
-app.put('/todolist/:id/update', (req, res) => {
+app.post('/todolist/:id/new', (req, res) => {
     const { todoId, todo, isCheck } = req.body;
     db('todolists')
-        .update({
+        .insert({
             'todolist': {
                 'todoId': todoId,
                 'todo': todo,
