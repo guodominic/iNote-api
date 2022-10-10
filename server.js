@@ -75,28 +75,30 @@ app.post('/note/new', (req, res) => {
 
 //For todo List below
 
-app.get('/todolist', (req, res) => {
-    db('todolist').then(data => {
+app.get('/todolist/:id', (req, res) => {
+    db('todolists').where('id', req.params.id).then(data => {
         res.status(200).json(data)
     })
         .catch(err => res.sendStatus(400).json('unable to fetch todo list'))
 })
 
-app.put('/todolist/update/:id', (req, res) => {
+app.put('/todolist/update/:id/:todoId', (req, res) => {
     const { todoId, todo, isCheck } = req.body;
-    db('inotes').where('id', req.params.id)
+    db('todolists').where('id', req.params.id)
         .update({
-            'todoId': todoId,
-            'todo': todo,
-            'isCheck': isCheck
+            'todolist': {
+                'todoId': todoId,
+                'todo': todo,
+                'isCheck': isCheck
+            }
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to update todo list'))
 
 })
 
-app.delete('/todolist/delete/:id', (req, res) => {
-    db('inotes').where('id', req.params.id)
+app.delete('/todolist/delete/:id/:todoId', (req, res) => {
+    db('todolists').where('id', req.params.id).where('todoId', req.params.)
         .del()
         .then(res.json({ success: true }))
         .catch(err => res.status(400).json('unable to delete'))
