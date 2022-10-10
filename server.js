@@ -75,6 +75,13 @@ app.post('/note/new', (req, res) => {
 
 //For todo List below
 
+app.get('/todolist', (req, res) => {
+    db('todolists').where('id', req.params.id).then(data => {
+        res.status(200).json(data)
+    })
+        .catch(err => res.sendStatus(400).json('unable to fetch todo list'))
+})
+
 app.get('/todolist/:id', (req, res) => {
     db('todolists').where('id', req.params.id).then(data => {
         res.status(200).json(data)
