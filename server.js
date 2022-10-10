@@ -77,14 +77,14 @@ app.post('/note/new', (req, res) => {
 //For todo List below
 
 
-app.get('/todolist/:id', (req, res) => {
+/* app.get('/todolist/:id', (req, res) => {
     db('todolists').where('id', req.params.id).then(data => {
         res.status(200).json(data)
     })
         .catch(err => res.sendStatus(400).json('unable to fetch todo list'))
-})
+}) */
 
-app.put('/todolist/update/:id/:todoId', (req, res) => {
+/* app.put('/todolist/update/:id/:todoId', (req, res) => {
     const { todoId, todo, isCheck } = req.body;
     db('todolists').where('id', req.params.id)
         .update({
@@ -120,7 +120,7 @@ app.post('/todolist/:id/new', (req, res) => {
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to create'))
 })
-
+ */
 app.listen(process.env.PORT || 3000, () => {
     console.log(`APP IS RUNNING ON ${process.env.PORT}`)
 });
