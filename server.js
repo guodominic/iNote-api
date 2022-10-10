@@ -73,6 +73,7 @@ app.post('/note/new', (req, res) => {
         .catch(err => res.status(400).json('unable to create'))
 })
 
+//************************************ */
 //For todo List below
 
 app.get('/todolist', (req, res) => {
@@ -111,6 +112,15 @@ app.delete('/todolist/delete/:id/:todoId', (req, res) => {
         .catch(err => res.status(400).json('unable to delete'))
 }
 )
+
+app.put('/todolist/:id/update', (req, res) => {
+    db('todolists')
+        .update({
+            'todolist': req.body.todolist
+        })
+        .then(res.status(200).send('recieved'))
+        .catch(err => res.status(400).json('unable to create'))
+})
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`APP IS RUNNING ON ${process.env.PORT}`)
