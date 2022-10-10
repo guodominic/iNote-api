@@ -48,7 +48,7 @@ app.put('/update/:id', (req, res) => {
         .update({
             'body': body,
             'lastupdate': lastupdate,
-            'todolist': todolist
+            'todolist': [todolist]
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to update'))
