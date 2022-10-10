@@ -114,9 +114,14 @@ app.delete('/todolist/delete/:id/:todoId', (req, res) => {
 )
 
 app.put('/todolist/:id/update', (req, res) => {
+    const { todoId, todo, isCheck } = req.body;
     db('todolists')
         .update({
-            'todolist': req.body.todolist
+            'todolist': {
+                'todoId': todoId,
+                'todo': todo,
+                'isCheck': isCheck
+            }
         })
         .then(res.status(200).send('recieved'))
         .catch(err => res.status(400).json('unable to create'))
