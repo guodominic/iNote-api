@@ -31,7 +31,7 @@ app.get('/iNote', (req, res) => {
     db('inotes').orderBy('id', 'asc').then(data => {
         res.status(200).json(data)
     })
-        .catch(err => res.status(400).json('unable to update'))
+        .catch(err => res.status(400).json('unable to fetch notes'))
 
 })
 
@@ -39,7 +39,7 @@ app.get('/note/:id', (req, res) => {
     const { id } = req.params;
     db.select('*').from('inotes').where('id', '=', id).then(data => {
         res.status(200).json(data)
-    }).catch(err => res.status(400).json('unable to update'))
+    }).catch(err => res.status(400).json('unable to fetch note'))
 })
 
 app.put('/update/:id', (req, res) => {
@@ -73,6 +73,35 @@ app.post('/note/new', (req, res) => {
         .catch(err => res.status(400).json('unable to create'))
 })
 
+//For todo List below
+
+app.get('/todolist', (req, res) => {
+    db('todolist').then(data => {
+        res.status(200).json(data)
+    })
+        .catch(err => res.sendStatus(400).json('unable to fetch todo list'))
+})
+
+app.put('/todolist/update/:id', (req, res) => {
+    const { todoId, todo, isCheck } = req.body;
+    db('inotes').where('id', req.params.id)
+        .update({
+            'todoId': todoId,
+            'todo': todo,
+            'isCheck': isCheck
+        })
+        .then(res.status(200).send('recieved'))
+        .catch(err => res.status(400).json('unable to update todo list'))
+
+})
+
+app.delete('/todolist/delete/:id', (req, res) => {
+    db('inotes').where('id', req.params.id)
+        .del()
+        .then(res.json({ success: true }))
+        .catch(err => res.status(400).json('unable to delete'))
+}
+)
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`APP IS RUNNING ON ${process.env.PORT}`)
