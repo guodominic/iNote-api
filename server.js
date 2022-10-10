@@ -98,7 +98,7 @@ app.put('/todolist/update/:id/:todoId', (req, res) => {
 })
 
 app.delete('/todolist/delete/:id/:todoId', (req, res) => {
-    db('todolists').where('id', req.params.id).where('todoId', req.params.)
+    db('todolists').where('id', req.params.id).where('todoId', req.params.todoId)
         .del()
         .then(res.json({ success: true }))
         .catch(err => res.status(400).json('unable to delete'))
